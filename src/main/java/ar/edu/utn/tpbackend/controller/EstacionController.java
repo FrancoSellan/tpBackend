@@ -3,10 +3,9 @@ package ar.edu.utn.tpbackend.controller;
 import ar.edu.utn.tpbackend.models.Estacion;
 import ar.edu.utn.tpbackend.repositories.EstacionRepository;
 import ar.edu.utn.tpbackend.services.EstacionService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 
@@ -74,5 +73,11 @@ public class EstacionController {
         double lonDiff = Math.abs(lon1 - lon2);
         double distancia = latDiff + lonDiff;
         return distancia;
+    }
+
+    @PostMapping
+    public ResponseEntity<String> agregarNuevaEstacion(@RequestBody Estacion nuevaEstacion) {
+        estacionService.add(nuevaEstacion);
+        return new ResponseEntity<>("Estación agregada correctamente", HttpStatus.CREATED);
     }
 }

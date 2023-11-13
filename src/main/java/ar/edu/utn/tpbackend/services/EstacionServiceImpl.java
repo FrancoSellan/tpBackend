@@ -16,7 +16,8 @@ public class EstacionServiceImpl implements EstacionService {
 
     @Override
     public Estacion add(Estacion entity) {
-        return null;
+        estacionRepository.save(entity);
+        return entity;
     }
 
     @Override

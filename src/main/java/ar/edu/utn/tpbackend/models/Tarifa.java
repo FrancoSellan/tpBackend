@@ -17,7 +17,7 @@ import jakarta.persistence.Id;
 public class Tarifa {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(name = "TIPO_TARIFA")
     private int tipoTarifa;
 

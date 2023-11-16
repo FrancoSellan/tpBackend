@@ -13,11 +13,11 @@ import org.springframework.http.ResponseEntity;
 @RequestMapping("/api/estacion")
 public class EstacionController {
     private final EstacionService estacionService;
-    private final EstacionRepository estacionRepository;
 
-    public EstacionController(EstacionService estacionService, EstacionRepository estacionRepository) {
+
+    public EstacionController(EstacionService estacionService) {
         this.estacionService = estacionService;
-        this.estacionRepository = estacionRepository;
+
     }
 
     @GetMapping
@@ -29,7 +29,7 @@ public class EstacionController {
     @GetMapping("/cercana/{id}")
     public ResponseEntity<Estacion> obtenerEstacionMasCercana(@PathVariable Long id) {
         // Obtener la estación correspondiente al ID proporcionado por el usuario
-        Estacion estacionSeleccionada = estacionRepository.findById(id).orElse(null);
+        Estacion estacionSeleccionada = estacionService.getById(id);
 
         if (estacionSeleccionada == null) {
             return ResponseEntity.notFound().build();
@@ -42,7 +42,7 @@ public class EstacionController {
     }
 
     private Estacion encontrarEstacionMasCercana(Estacion estacionSeleccionada) {
-        List<Estacion> todasLasEstaciones = estacionRepository.findAll();
+        List<Estacion> todasLasEstaciones = estacionService.getAll();
 
         Estacion estacionMasCercana = null;
         double distanciaMasCercana = Double.MAX_VALUE;

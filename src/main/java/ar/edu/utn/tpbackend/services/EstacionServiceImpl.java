@@ -2,9 +2,11 @@ package ar.edu.utn.tpbackend.services;
 
 import ar.edu.utn.tpbackend.models.Estacion;
 import ar.edu.utn.tpbackend.repositories.EstacionRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EstacionServiceImpl implements EstacionService {
@@ -32,12 +34,19 @@ public class EstacionServiceImpl implements EstacionService {
 
     @Override
     public Estacion getById(Long id) {
-        return null;
+        Optional<Estacion> optionalEstacion = estacionRepository.findById(id);
+        return optionalEstacion.orElseThrow();
     }
 
     @Override
     public List<Estacion> getAll() {
         List<Estacion> estaciones =  this.estacionRepository.findAll();
         return estaciones;
+    }
+
+    @Override
+    public Estacion existById(Long id) {
+        Optional<Estacion> estacion = estacionRepository.findById(id);
+        return estacion.orElse(null);
     }
 }

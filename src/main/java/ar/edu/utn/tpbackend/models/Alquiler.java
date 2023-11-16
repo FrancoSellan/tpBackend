@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
 
 @Entity(name="ALQUILERES")
 @Data
@@ -14,27 +13,27 @@ import java.time.LocalDateTime;
 public class Alquiler {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private int id_cliente;
 
     private int estado;
 
     @OneToOne
-    @JoinColumn(name = "ESTACION_RETIRO")
+    @JoinColumn(name = "ID")
     private Estacion estacion_retiro;
 
     @OneToOne
-    @JoinColumn(name = "ESTACION_DEVOLUCION")
+    @JoinColumn(name = "ID")
     private Estacion estacion_devolucion;
 
     private String fecha_hora_retiro;
 
     private String fecha_hora_devolucion;
 
-    private int monto;
+    private double monto;
 
     @OneToOne
-    @JoinColumn(name = "ID_TARIFA")
+    @JoinColumn(name = "ID")
     private Tarifa id_tarifa;
 }

@@ -9,5 +9,4 @@ public interface Service<T, ID>
     T delete(ID id);
     T getById(ID id);
     List<T> getAll();
-
 }
